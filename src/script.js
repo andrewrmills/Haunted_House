@@ -33,6 +33,13 @@ const doorNormalTexture = textureLoader.load('/textures/door/normal.jpg')
 const doorMetalnessTexture = textureLoader.load('/textures/door/metalness.jpg')
 const doorRoughnessTexture = textureLoader.load('/textures/door/roughness.jpg')
 
+const windowColorTexture = textureLoader.load('/textures/window/Glass_Window_002_basecolor.jpg')
+const windowHeightTexture = textureLoader.load('/textures/window/Glass_Window_002_height.png')
+const windowNormalTexture = textureLoader.load('/textures/window/Glass_Window_002_normal.jpg')
+const windowMetalnessTexture = textureLoader.load('/textures/window/Glass_Window_002_metallic.jpg')
+const windowRoughnessTexture = textureLoader.load('/textures/window/Glass_Window_002_roughness.jpg')
+const windowAmbientOcclusionTexture = textureLoader.load('/textures/window/Glass_Window_002_ambientOcclusion.jpg')
+
 const bricksColorTexture = textureLoader.load('/textures/bricks/color.jpg')
 const bricksAmbientOcclusionTexture = textureLoader.load('/textures/bricks/ambientOcclusion.jpg')
 const bricksNormalTexture = textureLoader.load('/textures/bricks/normal.jpg')
@@ -113,8 +120,47 @@ door.geometry.setAttribute(
     new THREE.Float32BufferAttribute(door.geometry.attributes.uv.array, 2)
     )
 door.position.y = 1
-door.position.z = 2.01
+door.position.z = 2.001
 house.add(door)
+
+// Window
+const window1 = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 0.8, 100, 100),
+    new THREE.MeshStandardMaterial({
+        map: windowColorTexture,
+        transparent: true,
+        aoMap: windowAmbientOcclusionTexture,
+        displacementMap: windowHeightTexture,
+        displacementScale : 0.1,
+        normalMap : windowNormalTexture,
+        metalnessMap : windowMetalnessTexture,
+        roughnessMap : windowRoughnessTexture
+    })
+)
+
+window1.position.y = 1.75
+window1.position.x = 1.25
+window1.position.z = 2.002
+house.add(window1)
+
+const window2 = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 0.8, 100, 100),
+    new THREE.MeshStandardMaterial({
+        map: windowColorTexture,
+        transparent: true,
+        aoMap: windowAmbientOcclusionTexture,
+        displacementMap: windowHeightTexture,
+        displacementScale : 0.1,
+        normalMap : windowNormalTexture,
+        metalnessMap : windowMetalnessTexture,
+        roughnessMap : windowRoughnessTexture
+    })
+)
+
+window2.position.y = 1.75
+window2.position.x = -1.25
+window2.position.z = 2.002
+house.add(window2)
 
 // Bushes
 const bushGeometry = new THREE.SphereGeometry(1, 16, 16)
